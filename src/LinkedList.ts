@@ -1,10 +1,12 @@
+import { Sorter } from './Sorter';
+
 class Node {
   next: Node | null = null;
 
   constructor(public data: number) {}
 }
 
-export class LinkedList {
+export class LinkedList extends Sorter {
   head: Node | null = null;
 
   add(data: number): void {
@@ -19,6 +21,7 @@ export class LinkedList {
     while (tail.next) {
       tail = tail.next;
     }
+
     tail.next = node;
   }
 
@@ -33,12 +36,13 @@ export class LinkedList {
       length++;
       node = node.next;
     }
+
     return length;
   }
 
   at(index: number): Node {
     if (!this.head) {
-      throw new Error('index out of bouns');
+      throw new Error('Index out of bounds');
     }
 
     let counter = 0;
@@ -47,16 +51,19 @@ export class LinkedList {
       if (counter === index) {
         return node;
       }
+
       counter++;
       node = node.next;
     }
-    throw new Error('index out of bouns');
+
+    throw new Error('Index out of bounds');
   }
 
   compare(leftIndex: number, rightIndex: number): boolean {
     if (!this.head) {
       throw new Error('List is empty');
     }
+
     return this.at(leftIndex).data > this.at(rightIndex).data;
   }
 
